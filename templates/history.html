@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PhishGuard - History</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <nav>
+
+        <a href="/">PhishGuard</a>
+
+        <a href="/scan">Scan</a>
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/history">History</a>
+
+        <a href="/about">About</a>
+
+    </nav>
+
+
+    <div class="container">
+
+
+        <div class="card">
+
+            <h1>Scan History</h1>
+
+            <p>
+                Previous URL scans are not stored by
+                the current version of PhishGuard.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>No Stored Scan History</h2>
+
+            <p>
+                PhishGuard currently analyzes URLs
+                in real time without saving scan
+                results to a database.
+            </p>
+
+            <p>
+                This keeps the current application
+                simple and avoids persistent storage
+                of submitted URLs.
+            </p>
+
+
+            <br>
+
+
+            <a href="/scan">
+
+                <button>
+                    START NEW SCAN
+                </button>
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <footer>
+
+        <p>
+            PhishGuard — URL Security Analysis System
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

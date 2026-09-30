@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PhishGuard - Security Report</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="/">PhishGuard</a>
+        <a href="/scan">Scan</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/history">History</a>
+        <a href="/about">About</a>
+    </nav>
+
+
+    <div class="container">
+
+        <!-- Report Header -->
+        <div class="card">
+
+            <h1>Security Analysis Report</h1>
+
+            <p>
+                Detailed analysis of the scanned URL using the
+                PhishGuard machine learning model and risk engine.
+            </p>
+
+        </div>
+
+
+        <!-- URL Information -->
+        <div class="card">
+
+            <h2>Scanned URL</h2>
+
+            <p>
+                <strong>{{ scan[1] }}</strong>
+            </p>
+
+        </div>
+
+
+        <!-- Main Result -->
+        <div class="stat-container">
+
+            <div class="stat-card">
+
+                <h3>Classification</h3>
+
+                <div class="stat-number">
+                    {{ scan[3] }}
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>Risk Score</h3>
+
+                <div class="stat-number">
+                    {{ scan[2] }} / 100
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>Risk Level</h3>
+
+                <div class="stat-number">
+                    {{ risk_level }}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Feature Analysis -->
+        <div class="card">
+
+            <h2>Feature Analysis</h2>
+
+            <p>
+                The following URL characteristics were extracted
+                during the analysis.
+            </p>
+
+            <table class="feature-table">
+
+                <tr>
+                    <th>Feature</th>
+                    <th>Value</th>
+                </tr>
+
+                <tr>
+                    <td>URL Length</td>
+                    <td>{{ features.url_length }}</td>
+                </tr>
+
+                <tr>
+                    <td>HTTPS</td>
+                    <td>
+                        {% if features.has_https %}
+                        Yes
+                        {% else %}
+                        No
+                        {% endif %}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Number of Dots</td>
+                    <td>{{ features.num_dots }}</td>
+                </tr>
+
+                <tr>
+                    <td>Number of Hyphens</td>
+                    <td>{{ features.num_hyphens }}</td>
+                </tr>
+
+                <tr>
+                    <td>Number of Slashes</td>
+                    <td>{{ features.num_slashes }}</td>
+                </tr>
+
+                <tr>
+                    <td>Number of Digits</td>
+                    <td>{{ features.num_digits }}</td>
+                </tr>
+
+                <tr>
+                    <td>Special Characters</td>
+                    <td>{{ features.num_special_chars }}</td>
+                </tr>
+
+                <tr>
+                    <td>Subdomains</td>
+                    <td>{{ features.num_subdomains }}</td>
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <!-- Explanation -->
+        <div class="card">
+
+            <h2>Security Explanation</h2>
+
+            <p>
+
+                {% if scan[4] %}
+
+                {{ scan[4] }}
+
+                {% else %}
+
+                This scan has been analyzed using the
+                PhishGuard machine learning model and risk engine.
+
+                {% endif %}
+
+            </p>
+
+        </div>
+
+
+        <!-- Scan Information -->
+        <div class="card">
+
+            <h2>Scan Information</h2>
+
+            <p>
+                <strong>Scan ID:</strong>
+                {{ scan[0] }}
+            </p>
+
+            <p>
+                <strong>Date and Time:</strong>
+                {{ scan[5] }}
+            </p>
+
+        </div>
+
+
+        <!-- Actions -->
+        <div class="card">
+
+            <h2>Quick Actions</h2>
+
+            <a href="/scan">
+                <button>SCAN ANOTHER URL</button>
+            </a>
+
+            &nbsp;
+
+            <a href="/history">
+                <button>VIEW HISTORY</button>
+            </a>
+
+            &nbsp;
+
+            <a href="/dashboard">
+                <button>DASHBOARD</button>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            PhishGuard — URL Security Analysis System
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PhishGuard - URL Scanner</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+    <nav>
+
+        <a href="/">PhishGuard</a>
+
+        <a href="/scan">Scan</a>
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/history">History</a>
+
+        <a href="/about">About</a>
+
+    </nav>
+
+
+    <!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+    <div class="container">
+
+
+        <div class="card">
+
+            <h1>URL Security Scanner</h1>
+
+            <p>
+                Enter a website URL below to analyze
+                its security characteristics.
+            </p>
+
+            <br>
+
+
+            <input type="text" id="url" placeholder="https://example.com" style="width: 70%; max-width: 600px;">
+
+
+            <button onclick="scanURL()">
+                ANALYZE URL
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+         RESULT
+    ================================================= -->
+
+        <div id="result"></div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+     FOOTER
+===================================================== -->
+
+    <footer>
+
+        <p>
+            PhishGuard — URL Security Analysis System
+        </p>
+
+    </footer>
+
+
+    <!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+    <script>
+
+
+        async function scanURL() {
+
+
+            // -------------------------------------------------
+            // Get URL from input
+            // -------------------------------------------------
+
+            const urlInput =
+                document.getElementById("url");
+
+            const url =
+                urlInput.value.trim();
+
+
+            // -------------------------------------------------
+            // Validate URL
+            // -------------------------------------------------
+
+            if (!url) {
+
+                alert("Please enter a URL.");
+
+                return;
+
+            }
+
+
+            // -------------------------------------------------
+            // Show loading message
+            // -------------------------------------------------
+
+            document.getElementById("result").innerHTML = `
+
+        <div class="result-card">
+
+            <h2>Analyzing...</h2>
+
+            <p>
+                PhishGuard is analyzing the URL.
+                Please wait.
+            </p>
+
+        </div>
+
+    `;
+
+
+            try {
+
+
+                // -------------------------------------------------
+                // Send JSON request to Flask
+                // -------------------------------------------------
+
+                const response = await fetch(
+                    "/analyze",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            url: url
+                        })
+                    }
+                );
+
+
+                // -------------------------------------------------
+                // Read response safely
+                // -------------------------------------------------
+
+                const responseText =
+                    await response.text();
+
+
+                let result;
+
+
+                try {
+
+                    result =
+                        JSON.parse(responseText);
+
+                }
+                catch (jsonError) {
+
+                    console.error(
+                        "Server returned non-JSON response:",
+                        responseText
+                    );
+
+
+                    document.getElementById("result").innerHTML = `
+
+                <div class="result-card">
+
+                    <h2>Server Error</h2>
+
+                    <p>
+                        The Flask server did not return
+                        a valid JSON response.
+                    </p>
+
+                    <p>
+                        Check the Flask terminal for
+                        the actual error.
+                    </p>
+
+                </div>
+
+            `;
+
+                    return;
+
+                }
+
+
+                // -------------------------------------------------
+                // Handle Flask error
+                // -------------------------------------------------
+
+                if (!response.ok || !result.success) {
+
+                    document.getElementById("result").innerHTML = `
+
+                <div class="result-card">
+
+                    <h2>Analysis Error</h2>
+
+                    <p>
+                        ${escapeHTML(
+                        result.error ||
+                        "Unable to analyze URL."
+                    )}
+                    </p>
+
+                </div>
+
+            `;
+
+                    return;
+
+                }
+
+
+                // -------------------------------------------------
+                // HTTPS status
+                // -------------------------------------------------
+
+                const httpsStatus =
+                    result.features.has_https
+                        ? "Yes"
+                        : "No";
+
+
+                // -------------------------------------------------
+                // Probability
+                // -------------------------------------------------
+
+                const probability =
+                    result.probability !== null &&
+                        result.probability !== undefined
+                        ? result.probability + "%"
+                        : "Not available";
+
+
+                // -------------------------------------------------
+                // Display result
+                // -------------------------------------------------
+
+                document.getElementById("result").innerHTML = `
+
+            <div class="result-card">
+
+
+                <h2>
+                    Security Analysis Result
+                </h2>
+
+
+                <h3>
+                    Scanned URL
+                </h3>
+
+                <p>
+                    ${escapeHTML(result.url)}
+                </p>
+
+
+                <h3>
+                    Classification
+                </h3>
+
+                <p>
+
+                    <strong>
+                        ${escapeHTML(result.prediction)}
+                    </strong>
+
+                </p>
+
+
+                <h3>
+                    Phishing Probability
+                </h3>
+
+                <p>
+
+                    <strong>
+                        ${probability}
+                    </strong>
+
+                </p>
+
+
+                <h3>
+                    Risk Score
+                </h3>
+
+                <p>
+
+                    <strong>
+                        ${result.risk_score} / 100
+                    </strong>
+
+                </p>
+
+
+                <h3>
+                    Security Explanation
+                </h3>
+
+                <p>
+                    ${escapeHTML(result.explanation)}
+                </p>
+
+
+                <h3>
+                    Feature Analysis
+                </h3>
+
+
+                <table class="feature-table">
+
+
+                    <tr>
+
+                        <th>
+                            Feature
+                        </th>
+
+                        <th>
+                            Value
+                        </th>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            URL Length
+                        </td>
+
+                        <td>
+                            ${result.features.url_length}
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            HTTPS
+                        </td>
+
+                        <td>
+                            ${httpsStatus}
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Number of Dots
+                        </td>
+
+                        <td>
+                            ${result.features.num_dots}
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Number of Hyphens
+                        </td>
+
+                        <td>
+                            ${result.features.num_hyphens}
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Number of Slashes
+                        </td>
+
+                        <td>
+                            ${result.features.num_slashes}
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Number of Digits
+                        </td>
+
+                        <td>
+                            ${result.features.num_digits}
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Special Characters
+                        </td>
+
+                        <td>
+                            ${result.features.num_special_chars}
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Subdomains
+                        </td>
+
+                        <td>
+                            ${result.features.num_subdomains}
+                        </td>
+
+                    </tr>
+
+
+                </table>
+
+
+            </div>
+
+        `;
+
+
+            }
+
+
+            catch (error) {
+
+
+                console.error(
+                    "Connection error:",
+                    error
+                );
+
+
+                document.getElementById("result").innerHTML = `
+
+            <div class="result-card">
+
+                <h2>
+                    Connection Error
+                </h2>
+
+                <p>
+                    Unable to connect to the
+                    PhishGuard Flask server.
+                </p>
+
+                <p>
+                    Make sure app.py is running.
+                </p>
+
+                <p>
+                    Error:
+                    ${escapeHTML(error.message)}
+                </p>
+
+            </div>
+
+        `;
+
+            }
+
+        }
+
+
+        /* =====================================================
+           ESCAPE HTML
+        ===================================================== */
+
+        function escapeHTML(text) {
+
+            const div =
+                document.createElement("div");
+
+            div.textContent =
+                String(text);
+
+            return div.innerHTML;
+
+        }
+
+
+        /* =====================================================
+           ALLOW ENTER KEY
+        ===================================================== */
+
+        document
+            .getElementById("url")
+            .addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (event.key === "Enter") {
+
+                        scanURL();
+
+                    }
+
+                }
+            );
+
+
+    </script>
+
+
+</body>
+
+</html>

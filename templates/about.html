@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PhishGuard - About</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <nav>
+
+        <a href="/">PhishGuard</a>
+
+        <a href="/scan">Scan</a>
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/history">History</a>
+
+        <a href="/about">About</a>
+
+    </nav>
+
+
+    <div class="container">
+
+
+        <div class="card">
+
+            <h1>About PhishGuard</h1>
+
+            <p>
+                PhishGuard is a machine learning based
+                URL security analysis system designed
+                to identify potentially phishing URLs.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>How PhishGuard Works</h2>
+
+            <p>
+                When a user submits a URL, PhishGuard
+                extracts important characteristics
+                from the URL.
+            </p>
+
+            <p>
+                These characteristics are passed to a
+                trained Random Forest machine learning
+                model, which classifies the URL as
+                potentially legitimate or phishing.
+            </p>
+
+            <p>
+                A separate risk engine analyzes the
+                URL characteristics and machine learning
+                prediction to produce a risk score.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Technologies Used</h2>
+
+            <ul>
+
+                <li>Python</li>
+
+                <li>Flask</li>
+
+                <li>Scikit-learn</li>
+
+                <li>Pandas</li>
+
+                <li>Joblib</li>
+
+                <li>HTML</li>
+
+                <li>CSS</li>
+
+                <li>JavaScript</li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Purpose</h2>
+
+            <p>
+                The project demonstrates how machine
+                learning and URL-based feature analysis
+                can be combined to assist in identifying
+                potentially malicious web addresses.
+            </p>
+
+            <p>
+                PhishGuard is intended as an educational
+                security analysis project and should not
+                be treated as a guarantee that a website
+                is safe or malicious.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Start Scanning</h2>
+
+            <a href="/scan">
+
+                <button>
+                    ANALYZE A URL
+                </button>
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <footer>
+
+        <p>
+            PhishGuard — URL Security Analysis System
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PhishGuard - Dashboard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <nav>
+
+        <a href="/">PhishGuard</a>
+
+        <a href="/scan">Scan</a>
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/history">History</a>
+
+        <a href="/about">About</a>
+
+    </nav>
+
+
+    <div class="container">
+
+
+        <div class="card">
+
+            <h1>PhishGuard Dashboard</h1>
+
+            <p>
+                Overview of the PhishGuard URL security
+                detection system.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>System Status</h2>
+
+            <p>
+                PhishGuard uses a machine learning model
+                to classify URLs as potentially phishing
+                or legitimate.
+            </p>
+
+            <p>
+                The trained model is based on URL
+                characteristics extracted from the
+                submitted website address.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Detection Features</h2>
+
+            <ul>
+
+                <li>URL Length</li>
+
+                <li>HTTPS Usage</li>
+
+                <li>Number of Dots</li>
+
+                <li>Number of Hyphens</li>
+
+                <li>Number of Slashes</li>
+
+                <li>Number of Digits</li>
+
+                <li>Special Characters</li>
+
+                <li>Number of Subdomains</li>
+
+            </ul>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Machine Learning Model</h2>
+
+            <p>
+                Model:
+                <strong>Random Forest Classifier</strong>
+            </p>
+
+            <p>
+                Classes:
+                <strong>Legitimate</strong> and
+                <strong>Phishing</strong>
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h2>Start a New Scan</h2>
+
+            <p>
+                Analyze a URL using the PhishGuard
+                detection system.
+            </p>
+
+            <a href="/scan">
+
+                <button>
+                    SCAN A URL
+                </button>
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <footer>
+
+        <p>
+            PhishGuard — URL Security Analysis System
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

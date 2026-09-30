@@ -1,0 +1,554 @@
+/* =========================================================
+   PHISHGUARD - GLOBAL STYLES
+========================================================= */
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        #f4f7fb;
+
+    color:
+        #1f2937;
+
+    min-height:
+        100vh;
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+nav {
+
+    background:
+        #111827;
+
+    padding:
+        18px 40px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        30px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.15);
+
+}
+
+
+nav a {
+
+    color:
+        white;
+
+    text-decoration:
+        none;
+
+    font-size:
+        16px;
+
+    font-weight:
+        600;
+
+    transition:
+        0.2s;
+
+}
+
+
+nav a:first-child {
+
+    font-size:
+        22px;
+
+    margin-right:
+        auto;
+
+}
+
+
+nav a:hover {
+
+    opacity:
+        0.75;
+
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.container {
+
+    width:
+        90%;
+
+    max-width:
+        1100px;
+
+    margin:
+        50px auto;
+
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card {
+
+    background:
+        white;
+
+    padding:
+        30px;
+
+    margin-bottom:
+        25px;
+
+    border-radius:
+        12px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.08);
+
+}
+
+
+/* =========================================================
+   HEADINGS
+========================================================= */
+
+h1 {
+
+    font-size:
+        32px;
+
+    margin-bottom:
+        15px;
+
+    color:
+        #111827;
+
+}
+
+
+h2 {
+
+    font-size:
+        24px;
+
+    margin-bottom:
+        15px;
+
+    color:
+        #111827;
+
+}
+
+
+h3 {
+
+    font-size:
+        18px;
+
+    margin-top:
+        20px;
+
+    margin-bottom:
+        8px;
+
+    color:
+        #374151;
+
+}
+
+
+/* =========================================================
+   PARAGRAPHS
+========================================================= */
+
+p {
+
+    line-height:
+        1.7;
+
+    color:
+        #4b5563;
+
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+input[type="text"] {
+
+    padding:
+        14px 16px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius:
+        8px;
+
+    font-size:
+        16px;
+
+    outline:
+        none;
+
+    transition:
+        0.2s;
+
+}
+
+
+input[type="text"]:focus {
+
+    border-color:
+        #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.12);
+
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+button {
+
+    background:
+        #2563eb;
+
+    color:
+        white;
+
+    border:
+        none;
+
+    padding:
+        13px 24px;
+
+    border-radius:
+        8px;
+
+    font-size:
+        15px;
+
+    font-weight:
+        600;
+
+    cursor:
+        pointer;
+
+    transition:
+        0.2s;
+
+    margin-top:
+        15px;
+
+}
+
+
+button:hover {
+
+    background:
+        #1d4ed8;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+button:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* =========================================================
+   RESULT CARD
+========================================================= */
+
+.result-card {
+
+    background:
+        white;
+
+    padding:
+        30px;
+
+    margin-top:
+        30px;
+
+    border-radius:
+        12px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.08);
+
+}
+
+
+/* =========================================================
+   FEATURE TABLE
+========================================================= */
+
+.feature-table {
+
+    width:
+        100%;
+
+    border-collapse:
+        collapse;
+
+    margin-top:
+        15px;
+
+}
+
+
+.feature-table th {
+
+    background:
+        #111827;
+
+    color:
+        white;
+
+    text-align:
+        left;
+
+    padding:
+        13px;
+
+}
+
+
+.feature-table td {
+
+    padding:
+        12px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+}
+
+
+.feature-table tr:nth-child(even) {
+
+    background:
+        #f9fafb;
+
+}
+
+
+/* =========================================================
+   LISTS
+========================================================= */
+
+ul {
+
+    margin-left:
+        25px;
+
+    line-height:
+        2;
+
+    color:
+        #4b5563;
+
+}
+
+
+/* =========================================================
+   LINKS
+========================================================= */
+
+a {
+
+    color:
+        #2563eb;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    text-align:
+        center;
+
+    padding:
+        30px 20px;
+
+    margin-top:
+        50px;
+
+    background:
+        #111827;
+
+}
+
+
+footer p {
+
+    color:
+        #d1d5db;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
+
+@media (max-width: 768px) {
+
+
+    nav {
+
+        padding:
+            15px;
+
+        gap:
+            15px;
+
+        flex-wrap:
+            wrap;
+
+    }
+
+
+    nav a:first-child {
+
+        width:
+            100%;
+
+        margin-right:
+            0;
+
+        margin-bottom:
+            5px;
+
+    }
+
+
+    .container {
+
+        width:
+            94%;
+
+        margin:
+            30px auto;
+
+    }
+
+
+    .card,
+    .result-card {
+
+        padding:
+            20px;
+
+    }
+
+
+    h1 {
+
+        font-size:
+            26px;
+
+    }
+
+
+    h2 {
+
+        font-size:
+            21px;
+
+    }
+
+
+    input[type="text"] {
+
+        width:
+            100% !important;
+
+        max-width:
+            none !important;
+
+        margin-bottom:
+            10px;
+
+    }
+
+
+    button {
+
+        width:
+            100%;
+
+    }
+
+
+    .feature-table {
+
+        font-size:
+            14px;
+
+    }
+
+
+    .feature-table th,
+    .feature-table td {
+
+        padding:
+            9px;
+
+    }
+
+}

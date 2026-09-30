@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PhishGuard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        /* =================================================
+           OPENING SCREEN
+        ================================================= */
+
+        .intro-screen {
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100vh;
+
+            background: #111827;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            z-index: 9999;
+
+            overflow: hidden;
+
+            animation:
+                introFadeOut 1s ease-in-out 3.5s forwards;
+
+        }
+
+
+        /* =================================================
+           PHISHGUARD TITLE
+        ================================================= */
+
+        .intro-title {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: clamp(45px, 9vw, 110px);
+
+            font-weight: 900;
+
+            letter-spacing: 8px;
+
+            color: white;
+
+            text-transform: uppercase;
+
+        }
+
+
+        /* =================================================
+           INDIVIDUAL LETTERS
+        ================================================= */
+
+        .intro-title span {
+
+            display: inline-block;
+
+            opacity: 0;
+
+        }
+
+
+        /* LEFT SIDE LETTERS */
+
+        .letter-left {
+
+            animation:
+                moveFromLeft 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+
+        }
+
+
+        /* RIGHT SIDE LETTERS */
+
+        .letter-right {
+
+            animation:
+                moveFromRight 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+
+        }
+
+
+        /* =================================================
+           LEFT ANIMATION
+        ================================================= */
+
+        @keyframes moveFromLeft {
+
+            0% {
+
+                transform:
+                    translateX(-100vw) rotate(-20deg);
+
+                opacity: 0;
+
+            }
+
+            60% {
+
+                opacity: 1;
+
+            }
+
+            100% {
+
+                transform:
+                    translateX(0) rotate(0);
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+        /* =================================================
+           RIGHT ANIMATION
+        ================================================= */
+
+        @keyframes moveFromRight {
+
+            0% {
+
+                transform:
+                    translateX(100vw) rotate(20deg);
+
+                opacity: 0;
+
+            }
+
+            60% {
+
+                opacity: 1;
+
+            }
+
+            100% {
+
+                transform:
+                    translateX(0) rotate(0);
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+        /* =================================================
+           EXIT ANIMATION
+        ================================================= */
+
+        @keyframes introFadeOut {
+
+            0% {
+
+                opacity: 1;
+
+                visibility: visible;
+
+            }
+
+            100% {
+
+                opacity: 0;
+
+                visibility: hidden;
+
+                pointer-events: none;
+
+            }
+
+        }
+
+
+        /* =================================================
+           MAIN HOME CONTENT
+        ================================================= */
+
+        .home-content {
+
+            text-align: center;
+
+            padding-top: 80px;
+
+        }
+
+
+        .home-title {
+
+            font-size: 48px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .home-subtitle {
+
+            font-size: 19px;
+
+            max-width: 700px;
+
+            margin:
+                0 auto 30px;
+
+        }
+
+
+        /* =================================================
+           MOBILE
+        ================================================= */
+
+        @media (max-width: 600px) {
+
+            .intro-title {
+
+                font-size: 42px;
+
+                letter-spacing: 4px;
+
+            }
+
+            .home-title {
+
+                font-size: 34px;
+
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+     ANIMATED OPENING SCREEN
+===================================================== -->
+
+    <div class="intro-screen">
+
+
+        <div class="intro-title">
+
+
+            <!-- P H I S -->
+
+            <span class="letter-left" style="animation-delay: 0.1s;">
+                P
+            </span>
+
+            <span class="letter-left" style="animation-delay: 0.2s;">
+                H
+            </span>
+
+            <span class="letter-left" style="animation-delay: 0.3s;">
+                I
+            </span>
+
+            <span class="letter-left" style="animation-delay: 0.4s;">
+                S
+            </span>
+
+
+            <!-- H G U A R D -->
+
+            <span class="letter-right" style="animation-delay: 0.4s;">
+                H
+            </span>
+
+            <span class="letter-right" style="animation-delay: 0.3s;">
+                G
+            </span>
+
+            <span class="letter-right" style="animation-delay: 0.2s;">
+                U
+            </span>
+
+            <span class="letter-right" style="animation-delay: 0.1s;">
+                A
+            </span>
+
+            <span class="letter-right" style="animation-delay: 0s;">
+                R
+            </span>
+
+            <span class="letter-right" style="animation-delay: 0s;">
+                D
+            </span>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+     NAVIGATION
+===================================================== -->
+
+    <nav>
+
+        <a href="/">PhishGuard</a>
+
+        <a href="/scan">Scan</a>
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/history">History</a>
+
+        <a href="/about">About</a>
+
+    </nav>
+
+
+    <!-- =====================================================
+     HOME CONTENT
+===================================================== -->
+
+    <div class="container">
+
+
+        <div class="card home-content">
+
+
+            <h1 class="home-title">
+                Welcome to PhishGuard
+            </h1>
+
+
+            <p class="home-subtitle">
+
+                A machine learning based URL security
+                analysis system designed to identify
+                potentially phishing websites.
+
+            </p>
+
+
+            <a href="/scan">
+
+                <button>
+                    START URL SCAN
+                </button>
+
+            </a>
+
+
+        </div>
+
+
+        <div class="card">
+
+
+            <h2>
+                Intelligent URL Protection
+            </h2>
+
+
+            <p>
+
+                PhishGuard analyzes multiple URL
+                characteristics and uses a trained
+                Random Forest machine learning model
+                to classify URLs as potentially
+                legitimate or phishing.
+
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+     FOOTER
+===================================================== -->
+
+    <footer>
+
+        <p>
+            PhishGuard — URL Security Analysis System
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
